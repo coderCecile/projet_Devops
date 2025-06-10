@@ -10,7 +10,7 @@ jobs:
           webhook: ${{secrets.DEVOPS_CHANEL_NOTIFICATION}}
           webhook-type: incoming-webhook
           payload: |
-            {text:"the front build is starting now"}
+            '{"text":"Hello, World!"}'
       - name: install git and cloning the repository
         uses: actions/checkout@v4
       - name: Setup Node.js environment

@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v4.4.0
       - run: cd Front/
-      - run: echo $(pwd)
+      - run: echo $(ls)
       - run: npm install
       - run: nom run build
       - run: echo "build effactué avec succes"

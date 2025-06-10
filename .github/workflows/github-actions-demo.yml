@@ -10,12 +10,13 @@ jobs:
           webhook: ${{secrets.DEVOPS_CHANEL_NOTIFICATION}}
           webhook-type: incoming-webhook
           payload: |
-            text:"the front build is starting now"
+            {text:"the front build is starting now"}
       - name: install git and cloning the repository
         uses: actions/checkout@v4
       - name: Setup Node.js environment
         uses: actions/setup-node@v4.4.0
       - run: cd Front/
+      - run: echo pwd
       - run: npm install
       - run: nom run build
       - run: echo "build effactué avec succes"

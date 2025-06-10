@@ -4,7 +4,7 @@ jobs:
   Front-build:
     runs-on: ubuntu-latest
     steps:
-      - name: Send message to Slack
+      - name: Send start message to Slack
         uses: slackapi/slack-github-action@v2.1.0
         with:
           webhook: ${{secrets.DEVOPS_CHANEL_NOTIFICATION}}
@@ -20,4 +20,11 @@ jobs:
           npm install
           npm run build
       - run: echo "build effactué avec succes"
+      - name: send success message to Slack
+        uses: slackapi/slack-github-action@v2.1.0
+        with: 
+          webhook: ${{secrets.DEVOPS_CHANEL_NOTIFICATION}}
+          webhook-type: incoming-webhook
+          payload: |
+            "{text: "the front build completed successfully"}"
 

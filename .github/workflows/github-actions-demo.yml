@@ -18,6 +18,6 @@ jobs:
       - run: |
           cd Front/
           npm install
-          nom run build
+          npm run build
       - run: echo "build effactué avec succes"
 

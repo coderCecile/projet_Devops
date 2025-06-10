@@ -1,23 +1,22 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+name: Rodrigue-pipeline
+on: push
 jobs:
-  Explore-GitHub-Actions:
+  Front-build:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
+      - name: Send message to Slack
+        uses: slackapi/slack-github-action@v2.1.0
+        with:
+          webhook: ${{secret.DEVOPS_CHANEL_NOTIFICATION}}
+          webhook-type: incoming-webhook
+          payload: |
+            text:"the front build is starting now"
+      - name: install git and cloning the repository
         uses: actions/checkout@v4
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
-  Rodrigue-github-actions:
-    needs: Explore-GitHub-Actions
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "mon premier jos est un succes 🎉 🎉 🎉 🎉 🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉 "
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4.4.0
+      - run: cd Front/
+      - run: npm install
+      - run: nom run build
+      - run: echo "build effactué avec succes"
+

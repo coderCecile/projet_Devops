@@ -26,5 +26,5 @@ jobs:
           webhook: ${{secrets.DEVOPS_CHANEL_NOTIFICATION}}
           webhook-type: incoming-webhook
           payload: |
-            "{text: "the front build completed successfully"}"
+            '{text:"the front build completed successfully"}'
 
